@@ -1,0 +1,15 @@
+/*----------------------------------------- Animated Gif Security System
+
+When the amount of motion crosses a threshold an animated gif is recorded
+and then played back on loop until the threshold is crossed again. Each
+gif is archived in the Images directory
+
+Matt Ganucheau - mganucheau@gmail.com
+
+gifAnimation library - http://www.extrapixel.ch/processing/gifAnimation/
+Timer - from Daniel Shiffman's Learning Processing (ex 10-5)
+-----------------------------------------------------------------------*/
+
+
+Version 0.1
+-------------------------------------------------------------------------------

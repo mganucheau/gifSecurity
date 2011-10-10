@@ -13,17 +13,18 @@ Gif      playingGif;
 Timer    timer;
 PImage   prevFrame;
 
-float threshold = 50;  // sensitivity of motion detector 
-int gifDelay    = 100; // fun to play with
-int gifNumber   = 0;   // start the gif count at 0
-int recording   = 4;   // recording state
+float threshold = 50;    // sensitivity of motion detector 
+int timerAmount = 2000;  // Amount of time to record
+int gifDelay    = 100;   // fun to play with
+int gifNumber   = 0;     // start the gif count at 0
+int recording   = 4;     // recording state
 
 
 void setup() {
   size(640, 480);
   frameRate(24);
   cam = new Capture(this, 640, 480);
-  timer = new Timer(2000);
+  timer = new Timer(timerAmount);
   prevFrame = createImage(cam.width, cam.height, RGB);
   gifExport = new GifMaker(this, "Images/gif-"+gifNumber+".gif", 10);
   gifExport.setRepeat(0);

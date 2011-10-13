@@ -12,9 +12,6 @@ class Timer {
 
   boolean isFinished() { 
     int passedTime = millis()- savedTime;
-    
-    println("clock:"+int(passedTime*.01));
-
     if (passedTime > totalTime) {
       return true;
     } 

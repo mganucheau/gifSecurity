@@ -1,8 +1,8 @@
-/*------------------------------- Animated Gif Security System
-Matt Ganucheau - mganucheau@gmail.com
-
-gifAnimation library - http://www.extrapixel.ch/processing/gifAnimation/
-Timer - from Daniel Shiffman's Learning Processing (ex 10-5)
+/*------------------------------- Animated Gif Security System 0.1
+ Matt Ganucheau - mganucheau@gmail.com
+ 
+ gifAnimation library - http://www.extrapixel.ch/processing/gifAnimation/
+ Timer - from Daniel Shiffman's Learning Processing (ex 10-5)
  ------------------------------------------------------------*/
 import gifAnimation.*;
 import processing.video.*;
@@ -13,11 +13,16 @@ Gif      playingGif;
 Timer    timer;
 PImage   prevFrame;
 
-float threshold = 50;    // sensitivity of motion detector 
+float threshold = 70;    // sensitivity of motion detector 0/high - 100/low
 int timerAmount = 2000;  // Amount of time to record
 int gifDelay    = 100;   // fun to play with
 int gifNumber   = 0;     // start the gif count at 0
 int recording   = 4;     // recording state
+
+String date() {
+  Calendar now = Calendar.getInstance();
+  return String.format("Images/%1$tm:%1$td:%1$ty/", now);
+}
 
 
 void setup() {
@@ -26,7 +31,8 @@ void setup() {
   cam = new Capture(this, 640, 480);
   timer = new Timer(timerAmount);
   prevFrame = createImage(cam.width, cam.height, RGB);
-  gifExport = new GifMaker(this, "Images/gif-"+gifNumber+".gif", 10);
+  
+  gifExport = new GifMaker(this, date()+"gif "+gifNumber+".gif", 10);
   gifExport.setRepeat(0);
 }
 
@@ -71,7 +77,7 @@ void draw() {
   } 
 
   if (recording == 1) {
-    gifExport = new GifMaker(this, "Images/gif-"+gifNumber+".gif", 10);
+    gifExport = new GifMaker(this, date()+"gif "+gifNumber+".gif", 10);
     gifExport.setRepeat(0);
     recording = 2;
   }
@@ -79,18 +85,21 @@ void draw() {
   if (recording == 2) {
     if (timer.isFinished()) {
       println("gif"+gifNumber+".gif done!");
-      playingGif = new Gif(this, "Images/gif-"+gifNumber+".gif");
+      playingGif = new Gif(this, date()+"gif "+gifNumber+".gif");
       playingGif.loop();
       gifExport.finish();
       gifNumber = gifNumber + 1;  
       recording = 0;
-    } else {
+      delay(500);  // Idea to help the buffer clear out
+    } 
+    else {
       gifExport.setDelay(100);
       gifExport.addFrame();
 
       smooth();
+      noStroke();
       fill(255, 0, 0);
-      ellipse(width-30, 30, 20, 20);
+      ellipse(width-30, 30, 10, 10);
     }
   } 
 
@@ -98,5 +107,3 @@ void draw() {
     image(playingGif, 0, 0);
   }
 }
-
-

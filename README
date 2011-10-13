@@ -19,9 +19,4 @@ Timer - from Daniel Shiffman's Learning Processing (ex 10-5)
 
 Version 0.1
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-
-  changes needed:  timestamp on files
-=======
 - added timestamp to saving
->>>>>>> added timestamp & included library
